@@ -1,0 +1,6 @@
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\bin\Release\SpoolSample.exe.config
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\bin\Release\SpoolSample.exe
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\obj\x64\Release\SpoolSample.csproj.AssemblyReference.cache
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\obj\x64\Release\SpoolSample.csproj.SuggestedBindingRedirects.cache
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\obj\x64\Release\SpoolSample.csproj.CoreCompileInputs.cache
+C:\Users\n0isegat3\source\repos\SpoolSample\SpoolSample\obj\x64\Release\SpoolSample.exe

@@ -1,0 +1,8 @@
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\bin\x64\Release\PrintSpooferNet.exe.config
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\bin\x64\Release\PrintSpooferNet.exe
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\bin\x64\Release\PrintSpooferNet.pdb
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\obj\x64\Release\PrintSpooferNet.csproj.AssemblyReference.cache
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\obj\x64\Release\PrintSpooferNet.csproj.SuggestedBindingRedirects.cache
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\obj\x64\Release\PrintSpooferNet.csproj.CoreCompileInputs.cache
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\obj\x64\Release\PrintSpooferNet.exe
+C:\Users\n0isegat3\source\repos\PrintSpooferNet\obj\x64\Release\PrintSpooferNet.pdb
