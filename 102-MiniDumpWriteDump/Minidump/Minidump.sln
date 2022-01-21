@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minidump", "Minidump.csproj", "{BE0DD483-7609-4831-8874-D15743794BBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Debug|x64.ActiveCfg = Debug|x64
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Debug|x64.Build.0 = Debug|x64
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Release|x64.ActiveCfg = Release|x64
+		{BE0DD483-7609-4831-8874-D15743794BBB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {552DBFFB-BEEB-4F14-B307-C79B80EF3FF3}
+	EndGlobalSection
+EndGlobal
