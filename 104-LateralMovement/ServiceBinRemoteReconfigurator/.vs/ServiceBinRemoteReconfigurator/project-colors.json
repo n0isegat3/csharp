@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "fd55a1c1-99df-4df4-8351-0345b83bfec5": {
+      "ProjectGuid": "fd55a1c1-99df-4df4-8351-0345b83bfec5",
+      "DisplayName": "ServiceBinRemoteReconfigurator",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

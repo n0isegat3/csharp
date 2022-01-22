@@ -1,0 +1,8 @@
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\bin\x64\Release\n0iseExec.exe.config
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\bin\x64\Release\n0iseExec.exe
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\bin\x64\Release\n0iseExec.pdb
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\obj\x64\Release\n0iseExec.csproj.AssemblyReference.cache
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\obj\x64\Release\n0iseExec.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\obj\x64\Release\n0iseExec.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\obj\x64\Release\n0iseExec.exe
+C:\git\n0isegat3\csharp\104-LateralMover\n0iseExec\obj\x64\Release\n0iseExec.pdb
