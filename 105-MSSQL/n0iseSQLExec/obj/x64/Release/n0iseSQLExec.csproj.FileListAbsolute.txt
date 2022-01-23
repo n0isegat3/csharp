@@ -1,0 +1,5 @@
+C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQLExec\bin\x64\Release\n0iseSQLExec.dll
+C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQLExec\bin\x64\Release\n0iseSQLExec.pdb
+C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQLExec\obj\x64\Release\n0iseSQLExec.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQLExec\obj\x64\Release\n0iseSQLExec.dll
+C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQLExec\obj\x64\Release\n0iseSQLExec.pdb

