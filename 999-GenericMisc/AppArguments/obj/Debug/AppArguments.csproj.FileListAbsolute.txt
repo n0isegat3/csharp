@@ -1,0 +1,3 @@
+C:\git\n0isegat3\csharp\999-GenericMisc\AppArguments\obj\Debug\AppArguments.csproj.AssemblyReference.cache
+C:\git\n0isegat3\csharp\999-GenericMisc\AppArguments\obj\Debug\AppArguments.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\999-GenericMisc\AppArguments\obj\Debug\AppArguments.csproj.CoreCompileInputs.cache
