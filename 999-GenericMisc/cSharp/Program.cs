@@ -41,6 +41,8 @@ namespace cSharp
             Console.WriteLine(RandomString(8));
 
             Console.ReadKey();
+
+
         }
     }
 }

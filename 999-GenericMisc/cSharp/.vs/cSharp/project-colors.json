@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b2f8cb8f-ccfb-405b-ae83-dc48cc6f035f": {
+      "ProjectGuid": "b2f8cb8f-ccfb-405b-ae83-dc48cc6f035f",
+      "DisplayName": "cSharp",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
