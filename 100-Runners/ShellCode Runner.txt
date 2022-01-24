@@ -1,3 +1,5 @@
+#works only in PowerShell 5+
+
 function LookupFunc {
     Param ($moduleName, $functionName)
     $assem = ([AppDomain]::CurrentDomain.GetAssemblies() |
