@@ -1,0 +1,8 @@
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\bin\x64\Release\enc0d3r.exe.config
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\bin\x64\Release\enc0d3r.exe
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\bin\x64\Release\enc0d3r.pdb
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\obj\x64\Release\enc0d3r.csproj.AssemblyReference.cache
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\obj\x64\Release\enc0d3r.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\obj\x64\Release\enc0d3r.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\obj\x64\Release\enc0d3r.exe
+C:\git\n0isegat3\csharp\100-Runners\enc0d3r\obj\x64\Release\enc0d3r.pdb
