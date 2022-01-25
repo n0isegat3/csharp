@@ -1,0 +1,8 @@
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\bin\Debug\n0iseSpoofer.exe.config
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\bin\Debug\n0iseSpoofer.exe
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\bin\Debug\n0iseSpoofer.pdb
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\obj\Debug\n0iseSpoofer.csproj.AssemblyReference.cache
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\obj\Debug\n0iseSpoofer.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\obj\Debug\n0iseSpoofer.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\obj\Debug\n0iseSpoofer.exe
+C:\git\n0isegat3\csharp\101-AccessTokens\n0iseSpoofer\obj\Debug\n0iseSpoofer.pdb
