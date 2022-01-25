@@ -1,0 +1,7 @@
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\bin\Debug\n0iseCsharpRunner.exe.config
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\bin\Debug\n0iseCsharpRunner.exe
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\bin\Debug\n0iseCsharpRunner.pdb
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\obj\Debug\n0iseCsharpRunner.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\obj\Debug\n0iseCsharpRunner.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\obj\Debug\n0iseCsharpRunner.exe
+C:\git\n0isegat3\csharp\100-Runners\n0iseCsharpRunner\obj\Debug\n0iseCsharpRunner.pdb
