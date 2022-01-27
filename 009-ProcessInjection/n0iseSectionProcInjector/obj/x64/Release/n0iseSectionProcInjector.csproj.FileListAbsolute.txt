@@ -1,0 +1,7 @@
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\bin\x64\Release\n0iseSectionProcInjector.exe.config
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\bin\x64\Release\n0iseSectionProcInjector.exe
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\bin\x64\Release\n0iseSectionProcInjector.pdb
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\obj\x64\Release\n0iseSectionProcInjector.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\obj\x64\Release\n0iseSectionProcInjector.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\obj\x64\Release\n0iseSectionProcInjector.exe
+C:\git\n0isegat3\csharp\009-ProcessInjection\n0iseSectionProcInjector\obj\x64\Release\n0iseSectionProcInjector.pdb
