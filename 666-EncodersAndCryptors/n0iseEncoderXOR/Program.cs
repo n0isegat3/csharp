@@ -12,11 +12,11 @@ namespace n0iseEncoderXOR
         {
             //payload sample not complete follows
             byte[] buf = new byte[5] { 0xfc, 0x48, 0x83, 0xe4, 0xf0 };
-
+            
             byte[] encoded = new byte[buf.Length];
             for (int i = 0; i < buf.Length; i++)
             {
-                encoded[i] = (byte)((uint)buf[i] ^ 0xfe); //change the XOR fixed key here and below!
+                encoded[i] = (byte)((uint)buf[i] ^ 0xfa); //change the XOR fixed key here and below!
             }
 
             StringBuilder hex = new StringBuilder(encoded.Length * 2);
@@ -31,7 +31,7 @@ namespace n0iseEncoderXOR
             Console.WriteLine("Decode snippet:");
             Console.WriteLine("for(int e = 0; e < buf.Length; e++)");
             Console.WriteLine("{");
-            Console.WriteLine("\t" + @"buf[e] = (byte)((uint)buf[e] ^ " + "0xfe" + @");"); //change the XOR fixed key here and up!
+            Console.WriteLine("\t" + @"buf[e] = (byte)((uint)buf[e] ^ " + "0xfa" + @");"); //change the XOR fixed key here and up!
             Console.WriteLine("}");
         }
     }
