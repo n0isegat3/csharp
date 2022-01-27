@@ -84,10 +84,5 @@ public class Program
 
         Console.WriteLine("Calling CreateRemoteThread");
         CreateRemoteThread(procHandle, IntPtr.Zero, 0, loadLibraryAddr, memAddr, 0, IntPtr.Zero);
-
-
-
-
-
     }
 }
