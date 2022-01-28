@@ -3,6 +3,8 @@ This repo contains different C# scripts from various sources and written by me a
 
 ## Acknowledgments, thank you!
 
+* https://github.com/calebstewart
+* https://github.com/rasta-mouse
 * https://github.com/leechristensen/SpoolSample
 * https://github.com/mvelazc0/defcon27_csharp_workshop
 * https://github.com/pwndizzle/c-sharp-memory-injection
