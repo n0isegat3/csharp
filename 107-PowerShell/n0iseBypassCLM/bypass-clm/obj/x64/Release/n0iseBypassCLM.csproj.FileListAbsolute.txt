@@ -1,0 +1,16 @@
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\bin\x64\Release\bypass-clm.exe.config
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\bin\x64\Release\bypass-clm.exe
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\bin\x64\Release\bypass-clm.pdb
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.AssemblyReference.cache
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.SuggestedBindingRedirects.cache
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.CoreCompileInputs.cache
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\obj\x64\Release\bypass-clm.exe
+C:\Git\n0isegat3\csharp\107-PowerShell\bclm\bypass-clm\obj\x64\Release\bypass-clm.pdb
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.AssemblyReference.cache
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.SuggestedBindingRedirects.cache
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\obj\x64\Release\n0iseBypassCLM.csproj.CoreCompileInputs.cache
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\bin\x64\Release\n0iseBypassCLM.exe.config
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\bin\x64\Release\n0iseBypassCLM.exe
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\bin\x64\Release\n0iseBypassCLM.pdb
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\obj\x64\Release\n0iseBypassCLM.exe
+C:\git\n0isegat3\csharp\107-PowerShell\n0iseBypassCLM\bypass-clm\obj\x64\Release\n0iseBypassCLM.pdb
