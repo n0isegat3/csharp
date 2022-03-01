@@ -6,3 +6,11 @@ C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.csproj.Sugge
 C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.csproj.CoreCompileInputs.cache
 C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.exe
 C:\git\n0isegat3\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.pdb
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\bin\x64\Release\n0iseSQL.exe.config
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\bin\x64\Release\n0iseSQL.exe
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\bin\x64\Release\n0iseSQL.pdb
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.csproj.AssemblyReference.cache
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.csproj.CoreCompileInputs.cache
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.exe
+C:\Users\ranger\osep2\csharp\105-MSSQL\n0iseSQL\obj\x64\Release\n0iseSQL.pdb

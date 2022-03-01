@@ -1,0 +1,8 @@
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\bin\x64\Release\n0iseSpoofer.exe.config
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\bin\x64\Release\n0iseSpoofer.exe
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\bin\x64\Release\n0iseSpoofer.pdb
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\obj\x64\Release\n0iseSpoofer.csproj.AssemblyReference.cache
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\obj\x64\Release\n0iseSpoofer.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\obj\x64\Release\n0iseSpoofer.csproj.CoreCompileInputs.cache
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\obj\x64\Release\n0iseSpoofer.exe
+C:\Users\ranger\osep2\csharp\101-AccessTokens\n0iseSpoofer\obj\x64\Release\n0iseSpoofer.pdb

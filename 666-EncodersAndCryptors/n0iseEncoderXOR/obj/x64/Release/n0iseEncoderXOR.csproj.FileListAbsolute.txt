@@ -6,3 +6,11 @@ C:\git\n0isegat3\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\
 C:\git\n0isegat3\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.csproj.CoreCompileInputs.cache
 C:\git\n0isegat3\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.exe
 C:\git\n0isegat3\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.pdb
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\bin\x64\Release\n0iseEncoderXOR.exe.config
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\bin\x64\Release\n0iseEncoderXOR.exe
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\bin\x64\Release\n0iseEncoderXOR.pdb
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.csproj.AssemblyReference.cache
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.csproj.CoreCompileInputs.cache
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.exe
+C:\Users\ranger\osep2\csharp\666-EncodersAndCryptors\n0iseEncoderXOR\obj\x64\Release\n0iseEncoderXOR.pdb

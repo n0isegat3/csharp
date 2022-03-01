@@ -1,0 +1,8 @@
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\bin\x64\Release\n0iseCsharpRunner.exe.config
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\bin\x64\Release\n0iseCsharpRunner.exe
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\bin\x64\Release\n0iseCsharpRunner.pdb
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\obj\x64\Release\n0iseCsharpRunner.csproj.AssemblyReference.cache
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\obj\x64\Release\n0iseCsharpRunner.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\obj\x64\Release\n0iseCsharpRunner.csproj.CoreCompileInputs.cache
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\obj\x64\Release\n0iseCsharpRunner.exe
+C:\Users\ranger\osep2\csharp\100-Runners\n0iseCsharpRunner\obj\x64\Release\n0iseCsharpRunner.pdb
