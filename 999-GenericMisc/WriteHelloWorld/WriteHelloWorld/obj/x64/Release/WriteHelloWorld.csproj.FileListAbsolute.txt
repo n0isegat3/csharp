@@ -1,0 +1,8 @@
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\obj\x64\Release\WriteHelloWorld.csproj.AssemblyReference.cache
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\obj\x64\Release\WriteHelloWorld.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\obj\x64\Release\WriteHelloWorld.csproj.CoreCompileInputs.cache
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\bin\x64\Release\WriteHelloWorld.exe.config
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\bin\x64\Release\WriteHelloWorld.exe
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\bin\x64\Release\WriteHelloWorld.pdb
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\obj\x64\Release\WriteHelloWorld.exe
+C:\Users\ranger\source\repos\WriteHelloWorld\WriteHelloWorld\obj\x64\Release\WriteHelloWorld.pdb

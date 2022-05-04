@@ -1,0 +1,8 @@
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\bin\x64\Release\WriteEvil.exe.config
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\bin\x64\Release\WriteEvil.exe
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\bin\x64\Release\WriteEvil.pdb
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\obj\x64\Release\WriteEvil.csproj.AssemblyReference.cache
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\obj\x64\Release\WriteEvil.csproj.SuggestedBindingRedirects.cache
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\obj\x64\Release\WriteEvil.csproj.CoreCompileInputs.cache
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\obj\x64\Release\WriteEvil.exe
+C:\Users\ranger\source\repos\WriteEvil\WriteEvil\obj\x64\Release\WriteEvil.pdb
