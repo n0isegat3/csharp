@@ -1,0 +1,10 @@
+﻿  dllmain.c
+dllmain.obj : warning LNK4104: export of symbol 'DllUnregisterServer' should be PRIVATE
+dllmain.obj : warning LNK4104: export of symbol 'DllRegisterServer' should be PRIVATE
+     Creating library C:\Users\ranger\source\repos\BypassApplockerDLL\x64\Release\BypassApplockerDLL.lib and object C:\Users\ranger\source\repos\BypassApplockerDLL\x64\Release\BypassApplockerDLL.exp
+  Generating code
+  13 of 14 functions (92.9%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  BypassApplockerDLL.vcxproj -> C:\Users\ranger\source\repos\BypassApplockerDLL\x64\Release\BypassApplockerDLL.dll
